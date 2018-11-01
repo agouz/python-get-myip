@@ -6,7 +6,11 @@ app = Flask(__name__)
 
 @app.route("/get_my_ip", methods=["GET"])
 def get_my_ip():
-    return request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
+    response = {
+        'headers': request.headers,
+        'ip': request.remote_addr
+    }
+    return jsonify(response), 200
 
 
 if __name__ == "__main__":
